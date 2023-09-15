@@ -1,55 +1,79 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { addTodo, deleteTodo, removeTodo } from "../actions/index";
+import "./Todo.css";
+import { useDispatch, useSelector } from "react-redux";
+import { createList } from "../actions/index";
+import { useNavigate } from "react-router-dom";
 
 function Todo() {
+  const [buttonValue, setbuttonvalue] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const list = useSelector((state) => state.todoReducer.list);
+  const List = useSelector((state) => state.ListReducer.list);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
-  const handleAddTodo = () => {
+  const handleButton = () => {
+    setbuttonvalue(!buttonValue);
+  };
+
+  const handleCreateTodo = () => {
     if (inputValue.trim() !== "") {
-      dispatch(addTodo(inputValue));
+      dispatch(createList(inputValue)); 
       setInputValue("");
+      setbuttonvalue(false)
     }
   };
 
-  
-  const handleDeleteTodo = (id) => {
-    dispatch(deleteTodo(id));
-  };
-  const handleRemoveTodo = () =>{
-    dispatch(removeTodo())
+  const handleCancelTodo = ()=>{
+    setbuttonvalue(false)
   }
 
-  return (
-    <>
-      <div>
-        <h1>Task Manager</h1>
-        <input
-          type="text"
-          placeholder="Enter Name"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}/>
-        <button type="submit" onClick={handleAddTodo}>Add</button>
-      </div>
-      <div>
-        <ul>
-          {list.map((elem, index) => (
-            <li key={index}>{elem.data}
-             <button onClick={() => handleDeleteTodo(elem.id)}>Delete</button>
-            </li>
-          ))}
-        </ul>
+  const handlePath = ()=>{
+    navigate(`/list-Detail`)
+  }
+  console.log(List)
 
-        <div>
-        <button onClick={() => handleRemoveTodo()}>remove</button>
-            
+  return (
+    <div className="task-body">
+      <div>
+        <div className="new-tabe">
+          <button onClick={handleButton}>New List</button>
         </div>
-      </div>
-    </>
+        {buttonValue ? (
+          <div className="inp-div">
+            <div className="inp-box">
+              <p>List Name</p>
+              <input
+                type="text"
+                placeholder="Enter Task"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+              />
+              <button type="submit" onClick={handleCancelTodo}>Cancel</button>
+              <button type="submit" onClick={handleCreateTodo}>Create List</button>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
+      </div> 
+
+       <div className="multilist">
+        {List.map((item, index) => {
+          return (
+            <div key={index} className="box-list">
+              <div className="icons">
+                <input type="checkbox" />
+              </div>
+              <div className="box-task" onClick={handlePath}>
+                <p>No task</p>
+              </div>
+              <h3>{item.name}</h3>
+            </div>
+          );
+        })}
+      </div>     
+    </div>
   );
 }
 
 export default Todo;
-
