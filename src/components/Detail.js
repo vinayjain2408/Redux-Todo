@@ -17,23 +17,19 @@ function Detail() {
   const handleChange = (e) => {
     setInputDetail(e.target.value);
   };
-  // const handleDelete = (id)=>{
-  //     dispatch(deletelist(id))
-  //     console.log("delte buton",id)
-  // }
-
-  const handleDelete = (index) => {
-    dispatch(deletelist(index)); // Pass the index to the action
-    console.log("delete button clicked for index", index);
+  const handleDelete = (id) => {
+    dispatch(deletelist(id));
+    console.log("delte buton", id);
   };
+
 
   const handleInputKeyPress = (e) => {
     if (e.key === "Enter" && inputDetail.trim() !== "") {
       dispatch(arry(inputDetail));
       setInputDetail("");
-      console.log(inputList);
     }
   };
+  console.log(inputList,"first");
   return (
     <div className="Detail-page">
       <div className="boxex">
@@ -80,13 +76,7 @@ function Detail() {
                           <option value="Medium">Medium</option>
                           <option value="Low">Low</option>
                         </select>
-                        {/* <button
-                       onClick={() => handleDelete(inp.id)}
-                      >
-                        Delete
-                      </button> */}
-
-                        <button onClick={() => handleDelete(index)}>
+                        <button onClick={() => handleDelete(inp.id)}>
                           Delete
                         </button>
                       </div>

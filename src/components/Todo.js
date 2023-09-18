@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react"; // Import useEffect
 import "./Todo.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createList } from "../actions/index";
+import { createList, deletetask } from "../actions/index";
 import { useNavigate } from "react-router-dom";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function Todo() {
   const [buttonValue, setbuttonvalue] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [isChecked, setIsChecked] = useState([]);
   const List = useSelector((state) => state.ListReducer.list);
+  const Detail_inputList = useSelector((state) => state.ListReducer.arry_push);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsChecked(new Array(List.length).fill(false));
+  }, [List]); 
 
   const handleButton = () => {
     setbuttonvalue(!buttonValue);
@@ -17,20 +24,35 @@ function Todo() {
 
   const handleCreateTodo = () => {
     if (inputValue.trim() !== "") {
-      dispatch(createList(inputValue)); 
+      dispatch(createList(inputValue));
       setInputValue("");
-      setbuttonvalue(false)
+      setbuttonvalue(false);
     }
   };
 
-  const handleCancelTodo = ()=>{
-    setbuttonvalue(false)
-  }
+  const handleCancelTodo = () => {
+    setbuttonvalue(false);
+  };
 
-  const handlePath = ()=>{
-    navigate(`/list-Detail`)
-  }
-  console.log(List)
+  const toggleCheck = (index) => {
+    const updatedIsChecked = [...isChecked];
+    updatedIsChecked[index] = !updatedIsChecked[index];
+    setIsChecked(updatedIsChecked);
+  };
+
+  const deleteTask = (id) => {
+    dispatch(deletetask(id));
+    setIsChecked((prevChecked) => {
+      const updatedIsChecked = [...prevChecked];
+      updatedIsChecked[id] = false;
+      return updatedIsChecked;
+    });
+    console.log(id, "todo js");
+  };
+
+  const handlePath = () => {
+    navigate(`/list-Detail`);
+  };
 
   return (
     <div className="task-body">
@@ -48,32 +70,189 @@ function Todo() {
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
               />
-              <button type="submit" onClick={handleCancelTodo}>Cancel</button>
-              <button type="submit" onClick={handleCreateTodo}>Create List</button>
+              <button type="submit" onClick={handleCancelTodo}>
+                Cancel
+              </button>
+              <button type="submit" onClick={handleCreateTodo}>
+                Create List
+              </button>
             </div>
           </div>
         ) : (
           ""
         )}
-      </div> 
+      </div>
 
-       <div className="multilist">
+      <div className="multilist">
         {List.map((item, index) => {
           return (
             <div key={index} className="box-list">
               <div className="icons">
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  checked={isChecked[index] || false}
+                  onChange={() => toggleCheck(index)}
+                />
+                {isChecked[index] ? (
+                  <button onClick={() => deleteTask(index)}>
+                    <DeleteIcon />
+                  </button>
+                ) : (
+                  ""
+                )}
               </div>
+
               <div className="box-task" onClick={handlePath}>
-                <p>No task</p>
+                {Detail_inputList.length === 0 ? (
+                  <p>No task</p>
+                ) : (
+                  Detail_inputList.map((detail) => (
+                    <p key={detail.id}>{detail.items}</p>
+                  ))
+                )}
               </div>
-              <h3>{item.name}</h3>
+
+              <h3>{item.data}</h3>
             </div>
           );
         })}
-      </div>     
+      </div>
     </div>
   );
 }
 
 export default Todo;
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState } from "react";
+// import "./Todo.css";
+// import { useDispatch, useSelector } from "react-redux";
+// import { createList, deletetask } from "../actions/index";
+// import { useNavigate } from "react-router-dom";
+// import DeleteIcon from "@mui/icons-material/Delete";
+
+// function Todo() {
+//   const [buttonValue, setbuttonvalue] = useState(false);
+//   const [inputValue, setInputValue] = useState("");
+//   const [isChecked, setIsChecked] = useState([]);
+//   const List = useSelector((state) => state.ListReducer.list);
+//   const Detail_inputList = useSelector((state) => state.ListReducer.arry_push);
+//   const dispatch = useDispatch();
+//   const navigate = useNavigate();
+
+//   const handleButton = () => {
+//     setbuttonvalue(!buttonValue);
+//   };
+//   // console.log(Detail_inputList);
+
+//   const handleCreateTodo = () => {
+//     if (inputValue.trim() !== "") {
+//       dispatch(createList(inputValue));
+//       setInputValue("");
+//       setbuttonvalue(false);
+//       // console.log(List)
+//     }
+//   };
+//   const handleCancelTodo = () => {
+//     setbuttonvalue(false);
+//   };
+
+//   const toggleCheck = (index) => {
+//     const updatedIsChecked = [...isChecked];
+//     updatedIsChecked[index] = !updatedIsChecked[index];
+//     setIsChecked(updatedIsChecked);
+//   };
+
+//   const deleteTask = (id)=>{
+//     dispatch(deletetask(id))
+//     // setIsChecked(false)
+//     setIsChecked((prevChecked) => {
+//       const updatedIsChecked = [...prevChecked];
+//       updatedIsChecked[id] = false; // Set to false when deleting
+//       return updatedIsChecked;
+//     });
+//     console.log(id,"todo js")
+//   }
+
+//   const handlePath = () => {
+//     navigate(`/list-Detail`);
+//   };
+//   // console.log(List);
+
+//   return (
+//     <div className="task-body">
+//       <div>
+//         <div className="new-tabe">
+//           <button onClick={handleButton}>New List</button>
+//         </div>
+//         {buttonValue ? (
+//           <div className="inp-div">
+//             <div className="inp-box">
+//               <p>List Name</p>
+//               <input
+//                 type="text"
+//                 placeholder="Enter Task"
+//                 value={inputValue}
+//                 onChange={(e) => setInputValue(e.target.value)}
+//               />
+//               <button type="submit" onClick={handleCancelTodo}>
+//                 Cancel
+//               </button>
+//               <button type="submit" onClick={handleCreateTodo}>
+//                 Create List
+//               </button>
+//             </div>
+//           </div>
+//         ) : (
+//           ""
+//         )}
+//       </div>
+
+//       <div className="multilist">
+//         {List.map((item, index) => {
+//           return (
+//             <div key={index} className="box-list">
+//               <div className="icons">
+//                 <input type="checkbox" 
+//                 checked={isChecked[index] || false}
+//                 onChange={() => toggleCheck(index)}
+//                 />
+//                  {isChecked[index] ? (
+//                   <button
+//                   onClick={() => deleteTask(index)}>
+//                     <DeleteIcon />
+//                   </button>
+//                 ) : (
+//                   ""
+//                 )}
+//               </div>
+
+//               <div className="box-task" onClick={handlePath}>
+//                 {Detail_inputList.length === 0 ? (
+//                   <p>No task</p>
+//                 ) : (
+//                   Detail_inputList.map((detail) => (
+//                     <p key={detail.id}>{detail.items}</p>
+//                   ))
+//                 )}
+//               </div>
+
+//               <h3>{item.data}</h3>
+//             </div>
+//           );
+//         })}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Todo;

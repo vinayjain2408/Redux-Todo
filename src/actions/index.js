@@ -2,7 +2,7 @@ export const createList = (data) =>{
     return {
         type : "CREATE_LIST" , 
         payload : {
-            data : data
+            data : data 
         }
     }
 }
@@ -10,29 +10,23 @@ export const arry = (items) =>{
     return {
         type : "PUSH_ARRAY",
         payload : {
-            items : items
+            items : items,
+            id:new Date().getTime().toString(),
         }
     }
 }
-// export const deletelist = (id) =>{
-//     return {
-//         type : "DELETE_ARRAY",
-//         id,
-//     }
-// }
-
-// export const deletelist = (id) => {
-//     return {
-//       type: "DELETE_ARRAY", // Use the appropriate action type
-//       id, // Ensure that you include the id in the action payload
-//     };
-//   };
-
-
-export const deletelist = (index) => {
+export const deletelist = (id) =>{
     return {
-      type: "DELETE_ARRAY",
-      index, // Pass the index to the reducer
-    };
-  };
+        type : "DELETE_ARRAY",
+        id ,
+    }
+}
+
+
+export const deletetask = (id) =>{
+    return {
+        type : "DELETE_TASK",
+        id ,
+    }
+}
   
