@@ -10,6 +10,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 function Detail() {
   const [inputDetail, setInputDetail] = useState("");
+  const [inputTarget, setInputTarget] = useState("");
   const dispatch = useDispatch();
   const inputList = useSelector((state) => state.ListReducer.arry_push);
   // const [inputDetailArry , setInputArry] = useState([])
@@ -21,14 +22,16 @@ function Detail() {
     dispatch(deletelist(id));
     console.log("delte buton", id);
   };
-
-
+  
   const handleInputKeyPress = (e) => {
     if (e.key === "Enter" && inputDetail.trim() !== "") {
       dispatch(arry(inputDetail));
       setInputDetail("");
     }
   };
+  const handleEdit = (e)=>{
+    setInputTarget(e.target.value)
+  }
   console.log(inputList,"first");
   return (
     <div className="Detail-page">
@@ -46,10 +49,10 @@ function Detail() {
                     <input
                       className="input-text"
                       type="text"
-                      readOnly
+                      // readOnly
                       value={inp.items}
-                      // onClick={(e) => handleEdit(e, index)}
-                      // onChange={(e) => handleEdit(e, index)}
+                      onClick={(e) => handleEdit(e, index)}
+                      onChange={(e) => handleEdit(e, index)}
                     />
                   </Typography>
                 </AccordionSummary>
