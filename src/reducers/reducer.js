@@ -1,6 +1,7 @@
 const initialData = {
   list: [],
   arry_push: [],
+  selectedColor: null,
 };
 
 const ListReducer = (state = initialData, action) => {
@@ -46,6 +47,14 @@ const ListReducer = (state = initialData, action) => {
       return {
         ...state,
         list: newItems,
+      };
+
+
+
+      case "SELECT_PICK":
+      return {
+        ...state,
+        selectedColor: action.payload.color, // Update the selectedColor in the state
       };
 
     default:

@@ -13,14 +13,13 @@ function Detail() {
   const [inputTarget, setInputTarget] = useState("");
   const dispatch = useDispatch();
   const inputList = useSelector((state) => state.ListReducer.arry_push);
-  // const [inputDetailArry , setInputArry] = useState([])
 
   const handleChange = (e) => {
     setInputDetail(e.target.value);
   };
   const handleDelete = (id) => {
     dispatch(deletelist(id));
-    console.log("delte buton", id);
+    console.log("delete buton", id);
   };
   
   const handleInputKeyPress = (e) => {
