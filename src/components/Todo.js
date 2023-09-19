@@ -9,15 +9,15 @@ function Todo() {
   const [buttonValue, setbuttonvalue] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [isChecked, setIsChecked] = useState([]);
+  const [cardInputContent, setCardInputContent] = useState([]);
   const List = useSelector((state) => state.ListReducer.list);
   const Detail_inputList = useSelector((state) => state.ListReducer.arry_push);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
-  const handleButton = () => {
-    setbuttonvalue(!buttonValue);
-  };
+  // const handleButton = () => {
+  //   setbuttonvalue(!buttonValue);
+  // };
 
   const handleCreateTodo = () => {
     if (inputValue.trim() !== "") {
@@ -49,6 +49,20 @@ function Todo() {
 
   const handlePath = () => {
     navigate(`/list-Detail`);
+  };
+  const handleButton = () => {
+    setbuttonvalue(!buttonValue);
+    // Initialize the input content for the new card
+    setCardInputContent((prevContent) => [...prevContent, ""]);
+  };
+
+  // ...
+
+  // Update the input content for a specific card
+  const handleCardInputChange = (index, value) => {
+    const updatedInputContent = [...cardInputContent];
+    updatedInputContent[index] = value;
+    setCardInputContent(updatedInputContent);
   };
 
   return (
@@ -82,6 +96,10 @@ function Todo() {
 
       <div className="multilist">
         {List.map((item, index) => {
+          // const detailsForCurrentList = Detail_inputList.filter(
+          //   (detail) => detail.listId === item.id
+          // );
+          
           return (
             <div key={index} className="box-list">
               <div className="icons">
@@ -103,9 +121,8 @@ function Todo() {
                 {Detail_inputList.length === 0 ? (
                   <p>No task</p>
                 ) : (
-                  Detail_inputList.map((detail) => (
-                    <p key={detail.id}>{detail.items}</p>
-                  ))
+                  // Display the input content specific to the current card
+                  <p>{cardInputContent[index]}</p>
                 )}
               </div>
 
@@ -119,4 +136,3 @@ function Todo() {
 }
 
 export default Todo;
-

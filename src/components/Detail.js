@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import "./Detail.css";
 import { useDispatch, useSelector } from "react-redux";
-import { arry, deletelist } from "../actions/index";
+import { arry, clearArray, deletelist } from "../actions/index";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useNavigate } from "react-router-dom";
 
 function Detail() {
   const [inputDetail, setInputDetail] = useState("");
-  const [inputTarget, setInputTarget] = useState("");
+  // const [inputTarget, setInputTarget] = useState("");
+  
   const dispatch = useDispatch();
   const inputList = useSelector((state) => state.ListReducer.arry_push);
 
@@ -28,12 +30,39 @@ function Detail() {
       setInputDetail("");
     }
   };
-  const handleEdit = (e)=>{
-    setInputTarget(e.target.value)
-  }
-  console.log(inputList,"first");
+
+  const navigate = useNavigate()
+
+  // const handleChangePath = (e)=>{
+  //   e.preventDefault()
+  //   dispatch(clearArray())
+  //   navigate("/")
+  //   console.log(inputList)
+
+  // }
+
+
+
+
+  // const handleEdit = (e)=>{
+  //   setInputTarget(e.target.value)
+  // }
+
+  // const handleEdit = (e, index) => {
+  //   const updatedInputList = inputList.map((item, i) => {
+  //     if (i === index) {
+  //       return e.target.value;
+  //     }
+  //     return item;
+  //   });
+  //   setInputTarget(updatedInputList);
+  // };
+
   return (
     <div className="Detail-page">
+      {/* <div className="back_path">
+      <a href="" onClick={handleChangePath}>Back Button</a>
+      </div> */}
       <div className="boxex">
         {inputList.map((inp, index) => {
           return (
@@ -50,8 +79,8 @@ function Detail() {
                       type="text"
                       // readOnly
                       value={inp.items}
-                      onClick={(e) => handleEdit(e, index)}
-                      onChange={(e) => handleEdit(e, index)}
+                      // onClick={(e) => handleEdit(e, index)}
+                      // onChange={(e) => handleEdit(e, index)}
                     />
                   </Typography>
                 </AccordionSummary>

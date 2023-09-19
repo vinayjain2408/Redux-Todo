@@ -19,7 +19,8 @@
     padding: 5px;
     position: absolute;
     z-index: 99;
-    background: #2c2b2bf7;
+    background:#0c0b0bf7;
+    /* background: #2c2b2bf7; */
     top: 105px;
 }
 
@@ -73,6 +74,9 @@
     width: 150px;
     background-color: #fff;
     
+}
+.box-list h3{
+    color: #fff;
 }
 .icons{
     position: absolute;

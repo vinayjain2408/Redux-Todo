@@ -26,6 +26,7 @@ function Navbar() {
   return (
     <div className="head" style={appStyle}>
       <h2>Todo List</h2>
+      
       <p>
         <a href='' onClick={handleColorToggle}>
           <ColorLensIcon />

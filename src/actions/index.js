@@ -2,7 +2,8 @@ export const createList = (data) => {
   return {
     type: "CREATE_LIST",
     payload: {
-      data: data,
+      // data: data,
+      data
     },
   };
 };
@@ -10,7 +11,8 @@ export const arry = (items) => {
   return {
     type: "PUSH_ARRAY",
     payload: {
-      items: items,
+      // items: items,
+      items,
       id: new Date().getTime().toString(),
     },
   };
@@ -22,7 +24,7 @@ export const deletelist = (id) => {
   };
 };
 
-export const deletetask = (id) => {
+export const deletetask = (id) =>{
   return {
     type: "DELETE_TASK",
     id,
@@ -35,3 +37,8 @@ export const selectColor = (color) => {
     payload: { color },
   };
 };
+
+
+export const clearArray = () => ({
+  type:  "CLEAR_ARRAY",
+});
