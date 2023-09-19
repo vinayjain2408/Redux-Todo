@@ -33,13 +33,13 @@ function Detail() {
 
   const navigate = useNavigate()
 
-  // const handleChangePath = (e)=>{
-  //   e.preventDefault()
-  //   dispatch(clearArray())
-  //   navigate("/")
-  //   console.log(inputList)
+  const handleChangePath = (e)=>{
+    e.preventDefault()
+    // dispatch(clearArray())
+    navigate("/")
+    console.log(inputList)
 
-  // }
+  }
 
 
 
@@ -60,9 +60,9 @@ function Detail() {
 
   return (
     <div className="Detail-page">
-      {/* <div className="back_path">
+      <div className="back_path">
       <a href="" onClick={handleChangePath}>Back Button</a>
-      </div> */}
+      </div>
       <div className="boxex">
         {inputList.map((inp, index) => {
           return (
