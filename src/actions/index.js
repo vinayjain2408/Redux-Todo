@@ -2,8 +2,8 @@ export const createList = (data) => {
   return {
     type: "CREATE_LIST",
     payload: {
-      // data: data,
-      data
+      data: data,
+      // data
     },
   };
 };

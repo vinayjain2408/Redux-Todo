@@ -35,14 +35,11 @@ function Detail() {
 
   const handleChangePath = (e)=>{
     e.preventDefault()
-    // dispatch(clearArray())
+    dispatch(clearArray())
     navigate("/")
     console.log(inputList)
 
   }
-
-
-
 
   // const handleEdit = (e)=>{
   //   setInputTarget(e.target.value)
