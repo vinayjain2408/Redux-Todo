@@ -1,9 +1,26 @@
-import { createStore } from 'redux';
 import RootReducer  from './reducers/index';
+import {createStore , applyMiddleware  } from "redux";
+import ListReducer from './reducers/reducer';
+import { composeWithDevTools } from "@redux-devtools/extension";
+import thunk from "redux-thunk";
 
-const store = createStore(RootReducer );
+const store = createStore(RootReducer,composeWithDevTools(applyMiddleware()) );
 
 export default store;
+
+
+
+// import {createStore , combineReducers, applyMiddleware  } from "redux";
+// import ListReducer from './reducers/reducer';
+// import { composeWithDevTools } from "@redux-devtools/extension";
+// import thunk from "redux-thunk";
+
+// const RootReducer = combineReducers({
+//     List:ListReducer
+// })
+// const store = createStore(RootReducer,composeWithDevTools(applyMiddleware(thunk)) );
+
+// export default store;
 
 
 

@@ -8,8 +8,10 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useNavigate } from "react-router-dom";
-
+import { useLocation } from "react-router-dom";
 function Detail() {
+  const location = useLocation();
+  const count = location.state;
   const [inputDetail, setInputDetail] = useState("");
   // const [inputTarget, setInputTarget] = useState("");
   
@@ -26,16 +28,17 @@ function Detail() {
   
   const handleInputKeyPress = (e) => {
     if (e.key === "Enter" && inputDetail.trim() !== "") {
-      dispatch(arry(inputDetail));
+      dispatch(arry(inputDetail, count));
       setInputDetail("");
     }
+    console.log(inputList)
   };
 
   const navigate = useNavigate()
 
   const handleChangePath = (e)=>{
     e.preventDefault()
-    dispatch(clearArray())
+    // dispatch(clearArray())
     navigate("/")
     console.log(inputList)
 
@@ -63,7 +66,7 @@ function Detail() {
       <div className="boxex">
         {inputList.map((inp, index) => {
           return (
-            <div key={index} className="Accordians">
+            <div key={inp.count} className="Accordians">
               <Accordion>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}

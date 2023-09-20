@@ -9,16 +9,15 @@ function Todo() {
   const [buttonValue, setbuttonvalue] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [isChecked, setIsChecked] = useState([]);
-  const [cardInputContent, setCardInputContent] = useState([]);
   const List = useSelector((state) => state.ListReducer.list);
   const Detail_inputList = useSelector((state) => state.ListReducer.arry_push);
-  console.log('Detail_inputList',Detail_inputList)
+  console.log("Detail_inputList", Detail_inputList);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const handleButton = () => {
-  //   setbuttonvalue(!buttonValue);
-  // };
+  const handleButton = () => {
+    setbuttonvalue(!buttonValue);
+  };
 
   const handleCreateTodo = () => {
     if (inputValue.trim() !== "") {
@@ -26,7 +25,7 @@ function Todo() {
       setInputValue("");
       setbuttonvalue(false);
     }
-    console.log("vinay", List)
+    console.log("vinay", List);
   };
 
   const handleCancelTodo = () => {
@@ -49,22 +48,10 @@ function Todo() {
     console.log(id, "todo js");
   };
 
-  const handlePath = () => {
-    navigate(`/list-Detail`);
-  };
-  const handleButton = () => {
-    setbuttonvalue(!buttonValue);
-    // Initialize the input content for the new card
-    setCardInputContent((prevContent) => [...prevContent, ""]);
-  };
-
-  // ...
-
-  // Update the input content for a specific card
-  const handleCardInputChange = (index, value) => {
-    const updatedInputContent = [...cardInputContent];
-    updatedInputContent[index] = value;
-    setCardInputContent(updatedInputContent);
+  const handlePath = (data) => {
+    // navigate(`/list-Detail`);
+    navigate(`/list-Detail` , { state: data });
+    // navigate(`/list-Detail/${data}`);
   };
 
   return (
@@ -98,12 +85,9 @@ function Todo() {
 
       <div className="multilist">
         {List.map((item, index) => {
-          // const detailsForCurrentList = Detail_inputList.filter(
-          //   (detail) => detail.listId === item.id
-          // );
-          console.log('List',List)
+          console.log("List", List);
           return (
-            <div key={index} className="box-list">
+            <div key={item.count} className="box-list">
               <div className="icons">
                 <input
                   type="checkbox"
@@ -119,17 +103,19 @@ function Todo() {
                 )}
               </div>
 
-              <div className="box-task" onClick={handlePath}>
+              <div className="box-task" onClick={() => handlePath(item.count)}>
                 {Detail_inputList.length === 0 ? (
                   <p>No task</p>
                 ) : (
-                  // Display the input content specific to the current card
-                  Detail_inputList.map((arry)=>{
-                    console.log('Detail_inputList',Detail_inputList)
-                    return(
+                  Detail_inputList.map((arry) => {
+                    if(arry.count === item.count){
+                      return <p>{arry.items}</p>;
+                    }
+                    else{
 
-                      <p>{arry.items}</p>
-                    )
+                      <p>No task</p>;
+
+                    }
                   })
                 )}
               </div>
@@ -205,10 +191,24 @@ export default Todo;
 //     navigate(`/list-Detail`);
 //   };
 
+// const handleButton = () => {
+//   setbuttonvalue(!buttonValue);
+//   // Initialize the input content for the new card
+//   setCardInputContent((prevContent) => [...prevContent, ""]);
+// };
+
+// ...
+
+// Update the input content for a specific card
+// const handleCardInputChange = (index, value) => {
+//   const updatedInputContent = [...cardInputContent];
+//   updatedInputContent[index] = value;
+//   setCardInputContent(updatedInputContent);
+// };
 
 //   return (
 //     <div className="task-body">
-      
+
 //       <div>
 //         <div className="new-tabe">
 //           <button onClick={handleButton}>New List</button>

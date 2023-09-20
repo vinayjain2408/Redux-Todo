@@ -7,11 +7,12 @@ export const createList = (data) => {
     },
   };
 };
-export const arry = (items) => {
+export const arry = (items,count) => {
   return {
     type: "PUSH_ARRAY",
     payload: {
       // items: items,
+      count,
       items,
       id: new Date().getTime().toString(),
     },
