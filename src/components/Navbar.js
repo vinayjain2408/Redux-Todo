@@ -1,52 +1,81 @@
 import React, { useState } from "react";
 import "./Navbar.css";
-import { ChromePicker } from "react-color";
-import { useDispatch, useSelector } from "react-redux";
-import ColorLensIcon from '@mui/icons-material/ColorLens'
-// import { selectColor } from "../actions/index"; 
 
 function Navbar() {
-  const [show, setShow] = useState(false);
-  const dispatch = useDispatch();
-  const ChooseColor = useSelector((state) => state.selectedColor);
-
-  // const ColorChangeHandler = (newColor) => {
-  //   dispatch(selectColor(newColor));
-  // };
-
-  const handleColorToggle = (e) => {
-    e.preventDefault();
-    setShow(!show);
-  };
-
-  const appStyle = {
-    backgroundColor: ChooseColor,
-  };
-
   return (
-    <div className="head" style={appStyle}>
+    <div className="head" >
       <h2>Todo List</h2>
-      
-      {/* <p>
-        <a href='' onClick={handleColorToggle}>
-          <ColorLensIcon />
-        </a>
-        {show ? (
-          <span className="color-sheet">
-            <ChromePicker
-              color={ChooseColor}
-              onChangeComplete={(color) => ColorChangeHandler(color.hex)}
-            />
-          </span>
-        ) : (
-          ""
-        )}
-      </p> */}
+
+      <p>color</p>
     </div>
   );
 }
 
 export default Navbar;
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState } from "react";
+// import "./Navbar.css";
+// import { ChromePicker } from "react-color";
+// import { useDispatch, useSelector } from "react-redux";
+// import ColorLensIcon from '@mui/icons-material/ColorLens'
+// import { selectColor } from "../actions/index";
+
+// function Navbar() {
+//   const [show, setShow] = useState(false);
+//   const dispatch = useDispatch();
+//   const ChooseColor = useSelector((state) => state.selectedColor);
+
+//   const ColorChangeHandler = (newColor) => {
+//     dispatch(selectColor(newColor));
+//   };
+
+//   const handleColorToggle = (e) => {
+//     e.preventDefault();
+//     setShow(!show);
+//   };
+
+//   const appStyle = {
+//     backgroundColor: ChooseColor,
+//   };
+
+//   return (
+//     <div className="head" style={appStyle}>
+//       <h2>Todo List</h2>
+
+//       <p>
+//         <a href='' onClick={handleColorToggle}>
+//           <ColorLensIcon />
+//         </a>
+//         {show ? (
+//           <span className="color-sheet">
+//             <ChromePicker
+//               color={ChooseColor}
+//               onChangeComplete={(color) => ColorChangeHandler(color.hex)}
+//             />
+//           </span>
+//         ) : (
+//           ""
+//         )}
+//       </p>
+//     </div>
+//   );
+// }
+
+// export default Navbar;
+
+
+
 
 
 
@@ -65,11 +94,11 @@ export default Navbar;
 // function Navbar() {
 //   const [show , setShow] = useState(false)
 //   const dispatch = useDispatch();
-//   const selectedColor = useSelector((state) => state.selectedColor); 
+//   const selectedColor = useSelector((state) => state.selectedColor);
 
 //   const handleColor = () => {
-//     const newColor = "#0000009b"; 
-//     dispatch(selectColor(newColor)); 
+//     const newColor = "#0000009b";
+//     dispatch(selectColor(newColor));
 //   };
 
 //   const handleColorToggle = (e)=>{
@@ -83,7 +112,7 @@ export default Navbar;
 //   }
 //   const appStyle ={
 //     backgroundColor : selectedColor,
-    
+
 //   }
 
 //   return (
