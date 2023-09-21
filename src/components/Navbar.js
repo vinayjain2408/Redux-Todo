@@ -3,16 +3,16 @@ import "./Navbar.css";
 import { ChromePicker } from "react-color";
 import { useDispatch, useSelector } from "react-redux";
 import ColorLensIcon from '@mui/icons-material/ColorLens'
-import { selectColor } from "../actions/index"; 
+// import { selectColor } from "../actions/index"; 
 
 function Navbar() {
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
   const ChooseColor = useSelector((state) => state.selectedColor);
 
-  const ColorChangeHandler = (newColor) => {
-    dispatch(selectColor(newColor));
-  };
+  // const ColorChangeHandler = (newColor) => {
+  //   dispatch(selectColor(newColor));
+  // };
 
   const handleColorToggle = (e) => {
     e.preventDefault();
@@ -27,7 +27,7 @@ function Navbar() {
     <div className="head" style={appStyle}>
       <h2>Todo List</h2>
       
-      <p>
+      {/* <p>
         <a href='' onClick={handleColorToggle}>
           <ColorLensIcon />
         </a>
@@ -41,7 +41,7 @@ function Navbar() {
         ) : (
           ""
         )}
-      </p>
+      </p> */}
     </div>
   );
 }

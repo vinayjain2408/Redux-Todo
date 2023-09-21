@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Todo.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createList, deletetask } from "../actions/index";
+import { createList } from "../actions/index";
 import { useNavigate } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -11,7 +11,7 @@ function Todo() {
   const [isChecked, setIsChecked] = useState([]);
   const List = useSelector((state) => state.ListReducer.list);
   const Detail_inputList = useSelector((state) => state.ListReducer.arry_push);
-  console.log("Detail_inputList", Detail_inputList);
+  // console.log("Detail_inputList", Detail_inputList);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -19,14 +19,30 @@ function Todo() {
     setbuttonvalue(!buttonValue);
   };
 
+  // const handleCreateTodo = () => {
+  //   if (inputValue.trim() !== "") {
+  //     dispatch(createList(inputValue));
+  //     setInputValue("");
+  //     setbuttonvalue(false);
+  //   }
+  //   console.log("vinay", List);
+  // };
+
+
   const handleCreateTodo = () => {
     if (inputValue.trim() !== "") {
       dispatch(createList(inputValue));
       setInputValue("");
       setbuttonvalue(false);
+
+      // Get the index of the newly created list (assuming it's the last one)
+      const newIndex = List.length;
+
+      // Navigate to the Detail.js component with the new list's index
+      // navigate(`/list-Detail`, { state: newIndex });
     }
-    console.log("vinay", List);
-  };
+  }
+
 
   const handleCancelTodo = () => {
     setbuttonvalue(false);
@@ -38,15 +54,15 @@ function Todo() {
     setIsChecked(updatedIsChecked);
   };
 
-  const deleteTask = (id) => {
-    dispatch(deletetask(id));
-    setIsChecked((prevChecked) => {
-      const updatedIsChecked = [...prevChecked];
-      updatedIsChecked[id] = false;
-      return updatedIsChecked;
-    });
-    console.log(id, "todo js");
-  };
+  // const deleteTask = (id) => {
+  //   dispatch(deletetask(id));
+  //   setIsChecked((prevChecked) => {
+  //     const updatedIsChecked = [...prevChecked];
+  //     updatedIsChecked[id] = false;
+  //     return updatedIsChecked;
+  //   });
+  //   console.log(id, "todo js");
+  // };
 
   const handlePath = (data) => {
     // navigate(`/list-Detail`);
@@ -84,43 +100,45 @@ function Todo() {
       </div>
 
       <div className="multilist">
-        {List.map((item, index) => {
-          console.log("List", List);
+        {List.map((list, index) => {
+          // console.log("List", List);
           return (
-            <div key={item.count} className="box-list">
+            <div key={list.id} className="box-list">
               <div className="icons">
                 <input
                   type="checkbox"
                   checked={isChecked[index] || false}
-                  onChange={() => toggleCheck(index)}
+                  onChange={(index) => toggleCheck(index)}
                 />
-                {isChecked[index] ? (
+                {/* {isChecked[index] ? (
                   <button onClick={() => deleteTask(index)}>
                     <DeleteIcon />
                   </button>
                 ) : (
                   ""
-                )}
+                )} */}
               </div>
 
-              <div className="box-task" onClick={() => handlePath(item.count)}>
+              <div className="box-task" onClick={() => handlePath(list.items)}>
+    
+                  <p>No task</p>
+                
+                
+              </div>
+              {/* <div className="box-task" onClick={() => handlePath(list.items)}>
                 {Detail_inputList.length === 0 ? (
                   <p>No task</p>
                 ) : (
                   Detail_inputList.map((arry) => {
-                    if(arry.count === item.count){
-                      return <p>{arry.items}</p>;
+                    if(arry.count === list.count){
+                      return <p>{arry.lists}</p>;
                     }
-                    else{
-
-                      <p>No task</p>;
-
-                    }
+                    else{<p>No task</p>;}
                   })
                 )}
-              </div>
+              </div> */}
 
-              <h3>{item.data}</h3>
+              <h3>{list.name}</h3>
             </div>
           );
         })}
@@ -130,6 +148,11 @@ function Todo() {
 }
 
 export default Todo;
+
+
+
+
+
 
 
 
@@ -237,7 +260,7 @@ export default Todo;
 //       </div>
 
 //       <div className="multilist">
-//         {List?.map((item, index) => {
+//         {List?.map((list, index) => {
 //           return (
 //             <div key={index} className="box-list">
 //               <div className="icons">
@@ -260,11 +283,11 @@ export default Todo;
 //                   <p>No task</p>
 //                 ) : (
 //                   Detail_inputList?.map((detail) => (
-//                     <p key={detail.id}>{detail.items}</p>
+//                     <p key={detail.id}>{detail.lists}</p>
 //                   ))
 //                 )}
 //               </div>
-//               <h3>{item.data}</h3>
+//               <h3>{list.data}</h3>
 //             </div>
 //           );
 //         })}
