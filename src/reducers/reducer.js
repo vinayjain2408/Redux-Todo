@@ -10,14 +10,16 @@ const ListReducer = (state = initialData, action) => {
         items: [],
         id: state.list.length + 1,
         receivedData: {
-          id: state.list.length + 1,
-          additionalData: [], // Initialize receivedData for the new list
+         id: state.list.length + 1,
+          additionalData: [], 
         },
       };
       return {
         ...state,
         list: [...state.list, newList],
       };
+
+
 
     
       case "PUSH_ARRAY":
@@ -26,15 +28,15 @@ const ListReducer = (state = initialData, action) => {
       
         if (listIndex !== -1) {
           const updatedReceivedData = {
-            parent_id: receivedData.id, // Update parent_id to receivedData.id
+            parent_id: receivedData.id, 
             additionalData: [
               ...state.list[listIndex].receivedData.additionalData.map((item, index) => ({
                 ...item,
-                child_id: index + 1, // Update child_id to start from 1 and increment for each item
+                child_id: index + 1, 
               })),
               {
                 ...itemToPush,
-                child_id: state.list[listIndex].receivedData.additionalData.length + 1, // Add child_id to the pushed item
+                child_id: state.list[listIndex].receivedData.additionalData.length + 1, 
               },
             ],
           };
