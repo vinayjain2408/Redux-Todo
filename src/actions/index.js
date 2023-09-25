@@ -3,7 +3,6 @@ export const createList = (name) => {
     type: "CREATE_LIST",
     payload: {
       name: name,
-      
       // data
     },
   };

@@ -86,9 +86,7 @@ function Todo() {
                 />
               </div>
 
-              <div className="box-task" onClick={() => handlePath(list.id, list.items)} >
-
-                
+              <div className="box-task" onClick={() => handlePath(list.id, list.items)} >   
                 <p>No task</p>
               </div>
 
@@ -102,6 +100,15 @@ function Todo() {
 }
 
 export default Todo;
+
+
+
+
+
+
+
+
+
 
 // import React, { useState } from "react";
 // import "./Todo.css";
