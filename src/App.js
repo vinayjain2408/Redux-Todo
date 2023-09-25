@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Todo />} />
           <Route path="/list-detail" element={<Detail />} />
-          {/* <Route path="/list-detail/:index" element={<Detail />} /> */}
+          {/* <Route path="/list-detail/:id" element={<Detail />} /> */}
         </Routes>
       </BrowserRouter>
     </Provider>

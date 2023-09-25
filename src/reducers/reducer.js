@@ -1,11 +1,15 @@
 const initialData = {
   list: [],
+  receivedData: {
+    additionalData: [], // Initialize additionalData as an empty array
+  },
   // arry_push: [],
 };
 
 const ListReducer = (state = initialData, action) => {
   switch (action.type) {
     case "CREATE_LIST":
+      
       const newList = {
         name: action.payload.name,
         items: [],
@@ -14,56 +18,29 @@ const ListReducer = (state = initialData, action) => {
       return {
         ...state,
         list: [...state.list, newList],
+       
       };
 
 
       case "PUSH_ARRAY":
+      
+        // Create a copy of the receivedData object
         const updatedReceivedData = {
-          ...action.payload.receivedData,
+          ...state.receivedData, // Keep the existing data
           additionalData: [
-            ...action.payload.receivedData.additionalData,
-            action.payload.itemToPush,
-            
+            ...state.receivedData.additionalData, // Keep existing items in the array
+            action.payload.itemToPush, // Add the new item
           ],
         };
-      
+  
         return {
           ...state,
-          receivedData: updatedReceivedData,
+          receivedData: updatedReceivedData, // Update the receivedData with the new data
         };
+  
+
       
 
-    // case "PUSH_ARRAY":
-    //   const updatedReceivedData = {
-    //     ...action.payload.receivedData,
-    //     additionalData: [
-    //       ...action.payload.receivedData.additionalData,
-    //       action.payload.itemToPush,
-    //     ],
-    //   };
-
-    //   return {
-    //     ...state,
-    //     additionalData: updatedReceivedData,
-    //   };
-
-
-
-
-    // case "PUSH_ARRAY":
-    //   const updatedList = state.list.map((item, index) => {
-    //     if (index === action.payload.index) {
-    //       return {
-    //         ...item,
-    //         items: [...item.items, action.payload.itemToPush],
-    //       };
-    //     }
-    //     return item;
-    //   });
-    //   return {
-    //     ...state,
-    //     list: updatedList,
-    //   };
 
     default:
       return state;
@@ -73,6 +50,40 @@ const ListReducer = (state = initialData, action) => {
 export default ListReducer;
 
 
+
+
+
+// case "PUSH_ARRAY":
+      //   // Create a copy of the receivedData object
+      //   const updatedReceivedData = {
+      //     ...state.receivedData, // Keep the existing data
+      //     additionalData: [
+      //       ...state.receivedData.additionalData, // Keep existing items in the array
+      //       action.payload.itemToPush, // Add the new item
+      //     ],
+      //   };
+      
+      //   return {  
+      //     ...state,
+      //     receivedData: updatedReceivedData, // Update the receivedData with the new data
+      //   };
+
+      
+
+      // case "PUSH_ARRAY":
+      //   const updatedReceivedData = {
+      //     ...action.payload.receivedData,
+      //     additionalData: [
+      //       ...action.payload.receivedData.additionalData,
+      //       action.payload.itemToPush,
+            
+      //     ],
+      //   };
+      
+      //   return {
+      //     ...state,
+      //     receivedData: [updatedReceivedData],
+      //   };
 
 
 
@@ -157,6 +168,9 @@ export default ListReducer;
 
 // export default ListReducer;
 
+
+
+
 // const initialData = {
 //   list: [],
 //   arry_push: [],
@@ -222,11 +236,21 @@ export default ListReducer;
 
 // export default ListReducer;
 
+
+
+
+
+
+
 // const initialData = {
 //   list: [],
 //   arry_push: [],
 //   selectedColor: null,
 // };
+
+
+
+
 
 // const ListReducer = (state = initialData, action) => {
 //   switch (action.type) {
