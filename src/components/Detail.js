@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import "./Detail.css";
 
+
 function Detail() {
   const [inputDetail, setInputDetail] = useState("");
   const navigate = useNavigate();

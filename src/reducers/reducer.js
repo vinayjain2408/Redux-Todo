@@ -75,6 +75,37 @@ const ListReducer = (state = initialData, action) => {
 
 
 
+    // case "PUSH_ARRAY":
+    //   const { receivedData, itemToPush} = action.payload;
+    //   const listIndex = state.list.findIndex((list) => list.id === receivedData.id);
+
+    //   if (listIndex !== -1) {
+    //     const updatedReceivedData = {
+    //       ...state.list[listIndex].receivedData,
+    //       additionalData: [
+    //         ...state.list[listIndex].receivedData.additionalData,
+    //         itemToPush,
+    //       ],
+    //     };
+
+    //     const updatedLists = [...state.list];
+    //     updatedLists[listIndex] = {
+    //       ...updatedLists[listIndex],
+    //       receivedData: updatedReceivedData,
+    //     };
+
+    //     return {
+    //       ...state,
+    //       list: updatedLists,
+    //     };
+    //   }
+
+    //   return state;
+
+
+
+
+
 
 // const initialData = {
 //   list: [],
