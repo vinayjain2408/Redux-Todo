@@ -19,8 +19,6 @@ const ListReducer = (state = initialData, action) => {
         list: [...state.list, newList],
       };
 
-
-
     
       case "PUSH_ARRAY":
         const { receivedData, itemToPush } = action.payload;
@@ -52,8 +50,7 @@ const ListReducer = (state = initialData, action) => {
             list: updatedLists,
           };
         }
-      
-        return state;
+       return state;
       
     
     
