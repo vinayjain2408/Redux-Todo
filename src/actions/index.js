@@ -20,18 +20,18 @@ export const pushToArray = (receivedData, itemToPush) => {
 };
 
 
+export const deletelist = (id) => {
+  return {
+    type: "DELETE_ARRAY",
+    id,
+  };
+};
 
 
 
 
 
 
-// export const deletelist = (id) => {
-//   return {
-//     type: "DELETE_ARRAY",
-//     id,
-//   };
-// };
 
 // export const deletetask = (id) =>{
 //   return {
@@ -107,3 +107,4 @@ export const pushToArray = (receivedData, itemToPush) => {
 // export const clearArray = () => ({
 //   type:  "CLEAR_ARRAY",
 // });
+

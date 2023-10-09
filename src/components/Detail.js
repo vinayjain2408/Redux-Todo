@@ -25,7 +25,7 @@ function Detail() {
 
   const handleChange = (e) => {
     setInputDetail(e.target.value);
-  };
+  };  
 
   const handleInputKeyPress = (e) => {
     if (e.key === "Enter" && inputDetail.trim() !== "") {
