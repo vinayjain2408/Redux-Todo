@@ -160,10 +160,10 @@ function Todo() {
     setIsChecked(updatedIsChecked);
   };
 
-  const handlePath = (newIndex, items) => {
+  const handlePath = (newIndex) => {
     const data = {
       id: newIndex,
-      additionalData: items,
+      // additionalData: items,
     };
 
     navigate(`/list-Detail`, { state: data });
@@ -247,7 +247,7 @@ function Todo() {
 
               <div
                 className="box-task"
-                onClick={() => handlePath(list.id, list.items)}
+                onClick={() => handlePath(list.id)}
               >
                 <p>
                   {list.receivedData.additionalData.length > 0
