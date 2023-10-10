@@ -122,20 +122,10 @@
 
 // export default Todo;
 
-
-
-
-
-
-
-
-
-
-
 import React, { useState } from "react";
 import "./Todo.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createList ,deletelist} from "../actions/index";
+import { createList, deletelist } from "../actions/index";
 import { useNavigate } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -213,7 +203,7 @@ function Todo() {
           console.log(list.receivedData.additionalData);
           return (
             <div key={list.id} className="box-list">
-              <div className="icons">
+              {/* <div className="icons">
                 <input
                   type="checkbox"
                   checked={isChecked[index] || false}
@@ -223,6 +213,31 @@ function Todo() {
                 {isChecked[index] ? (
                   <button
                   onClick={() => dispatch(deletelist(list.id))}>
+                    <DeleteIcon />
+                  </button>
+                ) : (
+                  ""
+                )}
+              </div> */}
+
+              <div className="icons">
+                <input
+                  type="checkbox"
+                  checked={isChecked[index] || false}
+                  onChange={() => toggleCheck(index)}
+                />
+
+                {isChecked[index] ? (
+                  <button
+                    onClick={() => {
+                      dispatch(deletelist(list.id));
+                      setIsChecked((prevState) => {
+                        const newState = [...prevState];
+                        newState.splice(index, 1);
+                        return newState;
+                      });
+                    }}
+                  >
                     <DeleteIcon />
                   </button>
                 ) : (
@@ -253,11 +268,6 @@ function Todo() {
 }
 
 export default Todo;
-
-
-
-
-
 
 // import React, { useState } from "react";
 // import "./Todo.css";

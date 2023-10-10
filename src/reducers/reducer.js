@@ -56,7 +56,6 @@ const ListReducer = (state = initialData, action) => {
       }
       return state;
 
-
     // case "DELETE_ARRAY":
     //   const newArray = state.arry_push.filter((item) => item.id !== action.id);
     //   return {
@@ -72,6 +71,41 @@ const ListReducer = (state = initialData, action) => {
         list: state.list.filter((listItem) => listItem.id !== idToDelete),
       };
 
+    // case "DELETE_TASK":
+    //   const newItems = state.list.receivedData.additionalData.filter((item, index) => index !== action.id);
+    //   return {
+    //     ...state,
+    //     list: newItems,
+    //   };
+
+    case "DELETE_TASK":
+      const updatedList = state.list.map((item) => {
+        if (item.id === 1) {
+          // Assuming you want to update the item with id 1.
+          const updatedReceivedData = {
+            ...item.receivedData,
+            additionalData: item.receivedData.additionalData.filter(
+              (dataItem) => dataItem.child_id !== action.id
+            ),
+          };
+          return {
+            ...item,
+            receivedData: updatedReceivedData,
+          };
+        }
+        return item;
+      });
+
+      return {
+        ...state,
+        list: updatedList,
+      };
+
+    case "SELECT_PICK":
+      return {
+        ...state,
+        selectedColor: action.payload.color,
+      };
 
     default:
       return state;
@@ -79,16 +113,6 @@ const ListReducer = (state = initialData, action) => {
 };
 
 export default ListReducer;
-
-
-
-
-
-
-
-
-
-
 
 
 

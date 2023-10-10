@@ -27,38 +27,21 @@ export const deletelist = (id) => {
   };
 };
 
+export const deleteDetailList = (id) =>{
+  return {
+    type: "DELETE_TASK",
+    id,
+  };
+};
 
 
 
-
-
-
-// export const deletetask = (id) =>{
-//   return {
-//     type: "DELETE_TASK",
-//     id,
-//   };
-// };
-
-// export const selectColor = (color) => {
-//   return {
-//     type: "SELECT_PICK",
-//     payload: { color },
-//   };
-// };
-
-
-// export const clearArray = () => ({
-//   type:  "CLEAR_ARRAY",
-// });
-
-
-
-
-
-
-
-
+export const selectColor = (color) => {
+  return {
+    type: "SELECT_PICK",
+    payload: { color },
+  };
+};
 
 
 

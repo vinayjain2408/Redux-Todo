@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { pushToArray } from "../actions/index";
+import { pushToArray ,deleteDetailList} from "../actions/index";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Accordion from "@mui/material/Accordion";
@@ -54,7 +54,7 @@ function Detail() {
       <div className="boxex">
         {additionalData && additionalData.receivedData.additionalData.length > 0
           ? additionalData.receivedData.additionalData.map((item, index) => (
-              <div key={index} className="Accordions">
+              <div key={index} className="Accords">
                 <Accordion>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
@@ -93,8 +93,8 @@ function Detail() {
                             <option value="Low">Low</option>
                           </select>
 
-                          <button >
-                            {/* onClick={() => handleDelete(inp.id)}> */}
+                          <button 
+                            onClick={() =>dispatch(deleteDetailList(item.child_id))}>
                             Delete
                           </button>
                         </div>

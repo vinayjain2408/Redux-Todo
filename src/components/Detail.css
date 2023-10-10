@@ -65,8 +65,16 @@
 }
 .date button{
     padding: 5px 10px;
+    margin-right: 4px;
+    border-radius: 10px;
+    background-color: rgb(71, 71, 227);
+    border: none;
+    color: #fff;
 }
-.Accordians{
+.date button:hover{
+    background-color: rgb(10, 141, 30);
+}
+.Accords{
   margin: 2px 10px;
 }
 .input-text{
