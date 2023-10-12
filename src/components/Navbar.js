@@ -23,7 +23,6 @@ function Navbar() {
   }
   const appStyle ={
     backgroundColor : currectColor,
-    
   }
   return (
     <div className='head'style={appStyle}>

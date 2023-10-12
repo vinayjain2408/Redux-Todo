@@ -25,7 +25,7 @@ const ListReducer = (state = initialData, action) => {
       const listIndex = state.list.findIndex(
         (list) => list.id === receivedData.id
       );
-
+      console.log(listIndex);
       if (listIndex !== -1) {
         const updatedReceivedData = {
           parent_id: receivedData.id,

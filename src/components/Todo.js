@@ -252,7 +252,7 @@ function Todo() {
                 <p>
                   {list.receivedData.additionalData.length > 0
                     ? list.receivedData.additionalData.map((name) => {
-                        return <p>{name.name}</p>;
+                        return <p key={name.name}>{name.name}</p>;
                       })
                     : "No task"}
                 </p>
